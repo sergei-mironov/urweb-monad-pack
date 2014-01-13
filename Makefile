@@ -9,13 +9,25 @@ ifdef MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: all
-all: ./lib.urp ./test/Test4.exe
+all: ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
 .PHONY: clean
 clean: 
-	rm -rf .cake3 ./test/Test4.exe
+	rm -rf .cake3 ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
 .PHONY: run
-run: ./test/Test4.exe
-	./test/Test4.exe
+run: ./test/TestState1.exe
+	./test/TestState1.exe
+./test/TestState1.exe: ./test/TestState1.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/TestState1
+./test/TestState1.urp: ./test/TestState1.urp.in
+	cat ./test/TestState1.urp.in > ./test/TestState1.urp
+./test/TestState1.urp.in: ./lib.urp ./test/TestState1.ur
+	touch ./test/TestState1.urp.in
+./test/TestError1.exe: ./test/TestError1.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/TestError1
+./test/TestError1.urp: ./test/TestError1.urp.in
+	cat ./test/TestError1.urp.in > ./test/TestError1.urp
+./test/TestError1.urp.in: ./lib.urp ./test/TestError1.ur
+	touch ./test/TestError1.urp.in
 ./test/Test4.exe: ./test/Test4.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/Test4
 ./test/Test4.urp: ./test/Test4.urp.in
@@ -24,7 +36,7 @@ run: ./test/Test4.exe
 	touch ./test/Test4.urp.in
 ./lib.urp: ./lib.urp.in
 	cat ./lib.urp.in > ./lib.urp
-./lib.urp.in: ./error.ur
+./lib.urp.in: ./error.ur ./identity.ur ./pure.ur ./state.ur
 	touch ./lib.urp.in
 $(call GUARD,URVERSION):
 	rm -f .cake3/GUARD_URVERSION_*
@@ -40,6 +52,18 @@ all: .fix-multy1
 clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
+.PHONY: ./test/TestState1.exe
+./test/TestState1.exe: .fix-multy1
+.PHONY: ./test/TestState1.urp
+./test/TestState1.urp: .fix-multy1
+.PHONY: ./test/TestState1.urp.in
+./test/TestState1.urp.in: .fix-multy1
+.PHONY: ./test/TestError1.exe
+./test/TestError1.exe: .fix-multy1
+.PHONY: ./test/TestError1.urp
+./test/TestError1.urp: .fix-multy1
+.PHONY: ./test/TestError1.urp.in
+./test/TestError1.urp.in: .fix-multy1
 .PHONY: ./test/Test4.exe
 ./test/Test4.exe: .fix-multy1
 .PHONY: ./test/Test4.urp

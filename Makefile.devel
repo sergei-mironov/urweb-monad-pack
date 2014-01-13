@@ -9,13 +9,25 @@ ifdef MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: all
-all: ./Makefile.devel ./lib.urp ./test/Test4.exe
+all: ./Makefile.devel ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
 .PHONY: clean
 clean: ./Makefile.devel
-	rm -rf .cake3 ./test/Test4.exe
+	rm -rf .cake3 ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
 .PHONY: run
-run: ./Makefile.devel ./test/Test4.exe
-	./test/Test4.exe
+run: ./Makefile.devel ./test/TestState1.exe
+	./test/TestState1.exe
+./test/TestState1.exe: ./Makefile.devel ./test/TestState1.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/TestState1
+./test/TestState1.urp: ./Makefile.devel ./test/TestState1.urp.in
+	cat ./test/TestState1.urp.in > ./test/TestState1.urp
+./test/TestState1.urp.in: ./Makefile.devel ./lib.urp ./test/TestState1.ur
+	touch ./test/TestState1.urp.in
+./test/TestError1.exe: ./Makefile.devel ./test/TestError1.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/TestError1
+./test/TestError1.urp: ./Makefile.devel ./test/TestError1.urp.in
+	cat ./test/TestError1.urp.in > ./test/TestError1.urp
+./test/TestError1.urp.in: ./Makefile.devel ./lib.urp ./test/TestError1.ur
+	touch ./test/TestError1.urp.in
 ./test/Test4.exe: ./Makefile.devel ./test/Test4.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/Test4
 ./test/Test4.urp: ./Makefile.devel ./test/Test4.urp.in
@@ -24,7 +36,7 @@ run: ./Makefile.devel ./test/Test4.exe
 	touch ./test/Test4.urp.in
 ./lib.urp: ./Makefile.devel ./lib.urp.in
 	cat ./lib.urp.in > ./lib.urp
-./lib.urp.in: ./Makefile.devel ./error.ur
+./lib.urp.in: ./Makefile.devel ./error.ur ./identity.ur ./pure.ur ./state.ur
 	touch ./lib.urp.in
 ./Cakegen: ./Cakefile.hs
 	cake3
@@ -44,6 +56,18 @@ all: .fix-multy1
 clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
+.PHONY: ./test/TestState1.exe
+./test/TestState1.exe: .fix-multy1
+.PHONY: ./test/TestState1.urp
+./test/TestState1.urp: .fix-multy1
+.PHONY: ./test/TestState1.urp.in
+./test/TestState1.urp.in: .fix-multy1
+.PHONY: ./test/TestError1.exe
+./test/TestError1.exe: .fix-multy1
+.PHONY: ./test/TestError1.urp
+./test/TestError1.urp: .fix-multy1
+.PHONY: ./test/TestError1.urp.in
+./test/TestError1.urp.in: .fix-multy1
 .PHONY: ./test/Test4.exe
 ./test/Test4.exe: .fix-multy1
 .PHONY: ./test/Test4.urp
