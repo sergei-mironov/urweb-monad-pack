@@ -9,13 +9,19 @@ ifdef MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: all
-all: ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
+all: ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe ./test/TestState2.exe
 .PHONY: clean
 clean: 
-	rm -rf .cake3 ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
+	rm -rf .cake3 ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe ./test/TestState2.exe
 .PHONY: run
-run: ./test/TestState1.exe
-	./test/TestState1.exe
+run: ./test/TestState2.exe
+	./test/TestState2.exe
+./test/TestState2.exe: ./test/TestState2.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/TestState2
+./test/TestState2.urp: ./test/TestState2.urp.in
+	cat ./test/TestState2.urp.in > ./test/TestState2.urp
+./test/TestState2.urp.in: ./lib.urp ./test/TestState2.ur
+	touch ./test/TestState2.urp.in
 ./test/TestState1.exe: ./test/TestState1.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState1
 ./test/TestState1.urp: ./test/TestState1.urp.in
@@ -52,6 +58,12 @@ all: .fix-multy1
 clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
+.PHONY: ./test/TestState2.exe
+./test/TestState2.exe: .fix-multy1
+.PHONY: ./test/TestState2.urp
+./test/TestState2.urp: .fix-multy1
+.PHONY: ./test/TestState2.urp.in
+./test/TestState2.urp.in: .fix-multy1
 .PHONY: ./test/TestState1.exe
 ./test/TestState1.exe: .fix-multy1
 .PHONY: ./test/TestState1.urp

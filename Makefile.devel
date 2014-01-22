@@ -9,13 +9,19 @@ ifdef MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: all
-all: ./Makefile.devel ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
+all: ./Makefile.devel ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe ./test/TestState2.exe
 .PHONY: clean
 clean: ./Makefile.devel
-	rm -rf .cake3 ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe
+	rm -rf .cake3 ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe ./test/TestState2.exe
 .PHONY: run
-run: ./Makefile.devel ./test/TestState1.exe
-	./test/TestState1.exe
+run: ./Makefile.devel ./test/TestState2.exe
+	./test/TestState2.exe
+./test/TestState2.exe: ./Makefile.devel ./test/TestState2.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/TestState2
+./test/TestState2.urp: ./Makefile.devel ./test/TestState2.urp.in
+	cat ./test/TestState2.urp.in > ./test/TestState2.urp
+./test/TestState2.urp.in: ./Makefile.devel ./lib.urp ./test/TestState2.ur
+	touch ./test/TestState2.urp.in
 ./test/TestState1.exe: ./Makefile.devel ./test/TestState1.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState1
 ./test/TestState1.urp: ./Makefile.devel ./test/TestState1.urp.in
@@ -56,6 +62,12 @@ all: .fix-multy1
 clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
+.PHONY: ./test/TestState2.exe
+./test/TestState2.exe: .fix-multy1
+.PHONY: ./test/TestState2.urp
+./test/TestState2.urp: .fix-multy1
+.PHONY: ./test/TestState2.urp.in
+./test/TestState2.urp.in: .fix-multy1
 .PHONY: ./test/TestState1.exe
 ./test/TestState1.exe: .fix-multy1
 .PHONY: ./test/TestState1.urp

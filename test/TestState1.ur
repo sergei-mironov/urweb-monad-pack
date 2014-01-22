@@ -1,15 +1,12 @@
-(*
-  Should show 2 alerts, but shows only the last one ("222")
-*)
 
 structure MT = State.Trans(struct con m = Basis.transaction end)
 
 fun main {} : transaction page = 
   s <- MT.eval {H = (return ())} (
       s1 <- MT.get {};
-      MT.set { H = (s1.H; alert "111")};
+      MT.set {H = (s1.H; alert "111")};
       s2 <- MT.get {};
-      MT.set { H = (s2.H; alert "222")};
+      MT.set {H = (s2.H; alert "222")};
       return {}
     );
   return
@@ -18,6 +15,7 @@ fun main {} : transaction page =
       </head>
       <body onload={s.H}>
         Urweb-monad test
+        Should popup 2 alerts: 111 and 222
       </body>
     </xml>
 

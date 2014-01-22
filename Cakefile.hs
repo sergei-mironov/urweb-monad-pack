@@ -14,7 +14,7 @@ project = do
     ur (single "identity.ur")
     ur (single "pure.ur")
 
-  apps <- forM ["Test4.ur", "TestError1.ur", "TestState1.ur"] $ \f -> do
+  apps <- forM ["Test4.ur", "TestError1.ur", "TestState1.ur", "TestState2.ur"] $ \f -> do
     let src = (file $ "test"</> f)
     uwapp "-dbms sqlite" (src.="urp") $ do
       library u
