@@ -59,3 +59,39 @@ fun main {} : transaction page =
       }/>
     </body>
   </xml>
+
+
+fun push [ctx:::{Unit}] (x:xml ctx [] []) : MT.state (xml ctx [] []) {} =
+  MT.modify (fn s => <xml>{s}{x}</xml>)
+
+fun nest [a ::: Type] [ctx:::{Unit}] [ctx2 :::{Unit}]
+    (f:xml ctx2 [] [] -> xml ctx [] [])
+    (x:MT.state (xml ctx2 [] []) a)
+      : MT.state (xml ctx [] []) a =
+  (xml2,a) <- MT.lift (MT.run <xml/> x);
+  push (f xml2);
+  return a
+
+fun source [st:::Type] [t:::Type] (x:t) : MT.state st (source t) =
+  MT.lift (Basis.source x)
+
+fun viewm {} : transaction page =
+  (xml,i) <- MT.run <xml/> (
+    s <- source False;
+    push (<xml>Hi1<br/></xml>);
+    push (<xml>Hi2<br/></xml>);
+    nest (fn x => <xml><table>{x}</table></xml>) (
+      push (<xml><tr><td>1</td><td>2</td></tr></xml>);
+      push (<xml><tr><td>3</td><td>4</td></tr></xml>)
+    );
+    return 0);
+  return
+    <xml>
+      <body>
+        {xml}
+        <br/>
+        {[i]}
+      </body>
+    </xml>
+
+  
