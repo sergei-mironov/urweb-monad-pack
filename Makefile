@@ -10,72 +10,85 @@ unexport MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: all
-all: ./Makefile ./Test4.sql ./TestError1.sql ./TestState1.sql ./TestState2.sql ./TestState3.sql ./lib.urp ./test/Test4.exe ./test/TestError1.exe ./test/TestState1.exe ./test/TestState2.exe ./test/TestState3.exe
+all: ./Makefile ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGen.exe ./test/XmlGen.sql
 .PHONY: clean
 clean: ./Makefile
-	rm -rf .cake3 ./Test4.sql   ./test/Test4.exe ./TestError1.sql   ./test/TestError1.exe ./TestState1.sql   ./test/TestState1.exe ./TestState2.sql   ./test/TestState2.exe ./TestState3.sql   ./test/TestState3.exe
+	rm -rf .cake3 ./test/Test4.sql   ./test/Test4.exe ./test/TestError1.sql   ./test/TestError1.exe ./test/TestState1.sql   ./test/TestState1.exe ./test/TestState2.sql   ./test/TestState2.exe ./test/TestState3.sql   ./test/TestState3.exe ./test/XmlGen.sql   ./test/XmlGen.exe
 .PHONY: run
-run: ./Makefile ./TestState3.sql ./test/TestState3.exe
-	./test/TestState3.exe
-./TestState3.sql: .fix-multy5
+run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
+	./test/XmlGen.exe
+./test/XmlGen.exe: .fix-multy6
+./test/XmlGen.urp: ./Makefile ./lib.urp ./test/XmlGen.ur .cake3/tmpXmlGen.in6
+	cat .cake3/tmpXmlGen.in6 > ./test/XmlGen.urp
+.cake3/tmpXmlGen.in6: ./Makefile
+	-rm -rf .cake3/tmpXmlGen.in6
+	echo 'database dbname=XmlGen' >> .cake3/tmpXmlGen.in6
+	echo 'sql .././test/XmlGen.sql' >> .cake3/tmpXmlGen.in6
+	echo 'library ../.' >> .cake3/tmpXmlGen.in6
+	echo 'debug' >> .cake3/tmpXmlGen.in6
+	echo '' >> .cake3/tmpXmlGen.in6
+	echo '$$/option' >> .cake3/tmpXmlGen.in6
+	echo '$$/list' >> .cake3/tmpXmlGen.in6
+	echo '.././test/XmlGen' >> .cake3/tmpXmlGen.in6
+./test/TestState3.exe: .fix-multy5
 ./test/TestState3.urp: ./Makefile ./lib.urp ./test/TestState3.ur .cake3/tmpTestState3.in5
 	cat .cake3/tmpTestState3.in5 > ./test/TestState3.urp
 .cake3/tmpTestState3.in5: ./Makefile
 	-rm -rf .cake3/tmpTestState3.in5
 	echo 'database dbname=TestState3' >> .cake3/tmpTestState3.in5
-	echo 'sql .././TestState3.sql' >> .cake3/tmpTestState3.in5
+	echo 'sql .././test/TestState3.sql' >> .cake3/tmpTestState3.in5
 	echo 'library ../.' >> .cake3/tmpTestState3.in5
 	echo 'debug' >> .cake3/tmpTestState3.in5
 	echo '' >> .cake3/tmpTestState3.in5
 	echo '$$/option' >> .cake3/tmpTestState3.in5
 	echo '$$/list' >> .cake3/tmpTestState3.in5
 	echo '.././test/TestState3' >> .cake3/tmpTestState3.in5
-./TestState2.sql: .fix-multy4
+./test/TestState2.exe: .fix-multy4
 ./test/TestState2.urp: ./Makefile ./lib.urp ./test/TestState2.ur .cake3/tmpTestState2.in4
 	cat .cake3/tmpTestState2.in4 > ./test/TestState2.urp
 .cake3/tmpTestState2.in4: ./Makefile
 	-rm -rf .cake3/tmpTestState2.in4
 	echo 'database dbname=TestState2' >> .cake3/tmpTestState2.in4
-	echo 'sql .././TestState2.sql' >> .cake3/tmpTestState2.in4
+	echo 'sql .././test/TestState2.sql' >> .cake3/tmpTestState2.in4
 	echo 'library ../.' >> .cake3/tmpTestState2.in4
 	echo 'debug' >> .cake3/tmpTestState2.in4
 	echo '' >> .cake3/tmpTestState2.in4
 	echo '$$/option' >> .cake3/tmpTestState2.in4
 	echo '$$/list' >> .cake3/tmpTestState2.in4
 	echo '.././test/TestState2' >> .cake3/tmpTestState2.in4
-./TestState1.sql: .fix-multy3
+./test/TestState1.exe: .fix-multy3
 ./test/TestState1.urp: ./Makefile ./lib.urp ./test/TestState1.ur .cake3/tmpTestState1.in3
 	cat .cake3/tmpTestState1.in3 > ./test/TestState1.urp
 .cake3/tmpTestState1.in3: ./Makefile
 	-rm -rf .cake3/tmpTestState1.in3
 	echo 'database dbname=TestState1' >> .cake3/tmpTestState1.in3
-	echo 'sql .././TestState1.sql' >> .cake3/tmpTestState1.in3
+	echo 'sql .././test/TestState1.sql' >> .cake3/tmpTestState1.in3
 	echo 'library ../.' >> .cake3/tmpTestState1.in3
 	echo 'debug' >> .cake3/tmpTestState1.in3
 	echo '' >> .cake3/tmpTestState1.in3
 	echo '$$/option' >> .cake3/tmpTestState1.in3
 	echo '$$/list' >> .cake3/tmpTestState1.in3
 	echo '.././test/TestState1' >> .cake3/tmpTestState1.in3
-./TestError1.sql: .fix-multy2
+./test/TestError1.exe: .fix-multy2
 ./test/TestError1.urp: ./Makefile ./lib.urp ./test/TestError1.ur .cake3/tmpTestError1.in2
 	cat .cake3/tmpTestError1.in2 > ./test/TestError1.urp
 .cake3/tmpTestError1.in2: ./Makefile
 	-rm -rf .cake3/tmpTestError1.in2
 	echo 'database dbname=TestError1' >> .cake3/tmpTestError1.in2
-	echo 'sql .././TestError1.sql' >> .cake3/tmpTestError1.in2
+	echo 'sql .././test/TestError1.sql' >> .cake3/tmpTestError1.in2
 	echo 'library ../.' >> .cake3/tmpTestError1.in2
 	echo 'debug' >> .cake3/tmpTestError1.in2
 	echo '' >> .cake3/tmpTestError1.in2
 	echo '$$/option' >> .cake3/tmpTestError1.in2
 	echo '$$/list' >> .cake3/tmpTestError1.in2
 	echo '.././test/TestError1' >> .cake3/tmpTestError1.in2
-./Test4.sql: .fix-multy1
+./test/Test4.exe: .fix-multy1
 ./test/Test4.urp: ./Makefile ./lib.urp ./test/Test4.ur .cake3/tmpTest4.in1
 	cat .cake3/tmpTest4.in1 > ./test/Test4.urp
 .cake3/tmpTest4.in1: ./Makefile
 	-rm -rf .cake3/tmpTest4.in1
 	echo 'database dbname=Test4' >> .cake3/tmpTest4.in1
-	echo 'sql .././Test4.sql' >> .cake3/tmpTest4.in1
+	echo 'sql .././test/Test4.sql' >> .cake3/tmpTest4.in1
 	echo 'library ../.' >> .cake3/tmpTest4.in1
 	echo 'debug' >> .cake3/tmpTest4.in1
 	echo '' >> .cake3/tmpTest4.in1
@@ -91,11 +104,12 @@ run: ./Makefile ./TestState3.sql ./test/TestState3.exe
 	echo './state' >> .cake3/tmplib.in0
 	echo './identity' >> .cake3/tmplib.in0
 	echo './pure' >> .cake3/tmplib.in0
-./test/Test4.exe: .fix-multy1
-./test/TestError1.exe: .fix-multy2
-./test/TestState1.exe: .fix-multy3
-./test/TestState2.exe: .fix-multy4
-./test/TestState3.exe: .fix-multy5
+./test/Test4.sql: .fix-multy1
+./test/TestError1.sql: .fix-multy2
+./test/TestState1.sql: .fix-multy3
+./test/TestState2.sql: .fix-multy4
+./test/TestState3.sql: .fix-multy5
+./test/XmlGen.sql: .fix-multy6
 .INTERMEDIATE: .fix-multy1
 .fix-multy1: ./Makefile ./test/Test4.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/Test4
@@ -111,6 +125,9 @@ run: ./Makefile ./TestState3.sql ./test/TestState3.exe
 .INTERMEDIATE: .fix-multy5
 .fix-multy5: ./Makefile ./test/TestState3.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState3
+.INTERMEDIATE: .fix-multy6
+.fix-multy6: ./Makefile ./test/XmlGen.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/XmlGen
 $(call GUARD,URVERSION):
 	rm -f .cake3/GUARD_URVERSION_*
 	touch $@
@@ -125,32 +142,38 @@ all: .fix-multy1
 clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
-.PHONY: ./TestState3.sql
-./TestState3.sql: .fix-multy1
+.PHONY: ./test/XmlGen.exe
+./test/XmlGen.exe: .fix-multy1
+.PHONY: ./test/XmlGen.urp
+./test/XmlGen.urp: .fix-multy1
+.PHONY: .cake3/tmpXmlGen.in6
+.cake3/tmpXmlGen.in6: .fix-multy1
+.PHONY: ./test/TestState3.exe
+./test/TestState3.exe: .fix-multy1
 .PHONY: ./test/TestState3.urp
 ./test/TestState3.urp: .fix-multy1
 .PHONY: .cake3/tmpTestState3.in5
 .cake3/tmpTestState3.in5: .fix-multy1
-.PHONY: ./TestState2.sql
-./TestState2.sql: .fix-multy1
+.PHONY: ./test/TestState2.exe
+./test/TestState2.exe: .fix-multy1
 .PHONY: ./test/TestState2.urp
 ./test/TestState2.urp: .fix-multy1
 .PHONY: .cake3/tmpTestState2.in4
 .cake3/tmpTestState2.in4: .fix-multy1
-.PHONY: ./TestState1.sql
-./TestState1.sql: .fix-multy1
+.PHONY: ./test/TestState1.exe
+./test/TestState1.exe: .fix-multy1
 .PHONY: ./test/TestState1.urp
 ./test/TestState1.urp: .fix-multy1
 .PHONY: .cake3/tmpTestState1.in3
 .cake3/tmpTestState1.in3: .fix-multy1
-.PHONY: ./TestError1.sql
-./TestError1.sql: .fix-multy1
+.PHONY: ./test/TestError1.exe
+./test/TestError1.exe: .fix-multy1
 .PHONY: ./test/TestError1.urp
 ./test/TestError1.urp: .fix-multy1
 .PHONY: .cake3/tmpTestError1.in2
 .cake3/tmpTestError1.in2: .fix-multy1
-.PHONY: ./Test4.sql
-./Test4.sql: .fix-multy1
+.PHONY: ./test/Test4.exe
+./test/Test4.exe: .fix-multy1
 .PHONY: ./test/Test4.urp
 ./test/Test4.urp: .fix-multy1
 .PHONY: .cake3/tmpTest4.in1
@@ -159,16 +182,18 @@ run: .fix-multy1
 ./lib.urp: .fix-multy1
 .PHONY: .cake3/tmplib.in0
 .cake3/tmplib.in0: .fix-multy1
-.PHONY: ./test/Test4.exe
-./test/Test4.exe: .fix-multy1
-.PHONY: ./test/TestError1.exe
-./test/TestError1.exe: .fix-multy1
-.PHONY: ./test/TestState1.exe
-./test/TestState1.exe: .fix-multy1
-.PHONY: ./test/TestState2.exe
-./test/TestState2.exe: .fix-multy1
-.PHONY: ./test/TestState3.exe
-./test/TestState3.exe: .fix-multy1
+.PHONY: ./test/Test4.sql
+./test/Test4.sql: .fix-multy1
+.PHONY: ./test/TestError1.sql
+./test/TestError1.sql: .fix-multy1
+.PHONY: ./test/TestState1.sql
+./test/TestState1.sql: .fix-multy1
+.PHONY: ./test/TestState2.sql
+./test/TestState2.sql: .fix-multy1
+.PHONY: ./test/TestState3.sql
+./test/TestState3.sql: .fix-multy1
+.PHONY: ./test/XmlGen.sql
+./test/XmlGen.sql: .fix-multy1
 .INTERMEDIATE: .fix-multy1
 .fix-multy1: 
 	-mkdir .cake3
