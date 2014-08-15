@@ -7,7 +7,7 @@ end) :
 
 sig
 
-  datatype state st a = State of (st -> S.m (st * a))
+  type state st a = st -> S.m (st * a)
 
   val unState : st ::: Type -> a ::: Type -> state st a -> (st -> S.m (st*a))
 
@@ -29,37 +29,37 @@ end =
 
 struct
 
-  datatype state st a = State of (st -> S.m (st * a))
+  type state st a = st -> S.m (st * a)
 
-  fun unState [st] [a] ((State f): state st a) : (st -> S.m (st*a)) = f
+  fun unState [st] [a] (f: state st a) : (st -> S.m (st*a)) = f
 
-  fun run [st] [a] (s:st) (m:state st a) : S.m (st * a) = (unState m) s
+  fun run [st] [a] (s:st) (m:state st a) : S.m (st * a) = m s
 
   fun eval [st] [a] (s:st) (m:state st a) : S.m st =
-    x <- ((unState m) s);
+    x <- (m s);
     let val (a,_) = x in return a end
 
-  fun mreturn [st] [a] (r:a) : state st a = State (fn st => return (st,r))
+  fun mreturn [st] [a] (r:a) : state st a = (fn (s:st) => return (s,r))
 
   fun mbind [st] [a] [b] (m1 : state st a) (m2 : a -> state st b) : state st b =
-    State (fn (s:st) =>
-      r <- (unState m1) s;
+    (fn (s:st) =>
+      r <- m1 s;
       case r of
-        (s', va) => unState (m2 va) s')
+        (s', va) => m2 va s')
 
-  fun get [st] {} : state st st = State (fn s => return (s,s))
+  fun get [st] {} : state st st = (fn (s:st) => return (s,s))
 
-  fun set [st] (s:st) : state st {} = State (fn _ => return (s,{}))
+  fun set [st] (s:st) : state st {} = (fn _ => return (s,{}))
 
-  fun modify [st] (f:st -> st) : state st {} = State (fn s => return (f s,{}))
+  fun modify [st] (f:st -> st) : state st {} = (fn s => return (f s,{}))
 
   val monad_state = fn [st ::: Type] => mkMonad { Return = @@mreturn [st], Bind = @@mbind [st] }
 
   fun lift [st] [a] (ma:S.m a) : state st a = 
-    State (fn (s:st) =>
+    (fn (s:st) =>
       a <- ma;
       return (s,a)
-      )
+    )
 
 end
 
