@@ -57,30 +57,44 @@ fun query_ [ctx ::: {Unit}] [tables ::: {{Type}}] [exps ::: {Type}] [tables ~ ex
 fun source [st:::Type] [t:::Type] (x:t) : MT.state st (source t) =
   MT.lift (Basis.source x)
 
+fun checked [x ::: Type] (l : list (source bool * x)) : transaction (list x) =
+  List.mapPartialM (fn (s,r) =>
+    v <- get s;
+    case v of
+      |True => return (Some r)
+      |False => return None) l
+
+fun rename (ids : list int) : transaction {} =
+  forM_ ids (fn id =>
+    dml(UPDATE t SET Nam = "Renamed" WHERE Id = {[id]}));
+  return {}
+
 fun viewm {} : transaction page =
   (xml,i) <- MT.run <xml/> (
-    s <- source False;
 
-    push (<xml>Test1<br/></xml>);
-    push (<xml>Test2<br/></xml>);
+    push (<xml><h1>XMLGen test</h1></xml>);
 
-    nest (fn x => <xml><table>{x}</table></xml>) (
-      push (<xml><tr><td>1</td><td>2</td></tr></xml>);
-      push (<xml><tr><td>3</td><td>4</td></tr></xml>);
-      return {}
+    ss <- nest (fn x => <xml><table>{x}</table></xml>) (
+      query (SELECT * FROM t) [] (fn r ss =>
+        s <- source False;
+        push (<xml><tr>
+          <td><ccheckbox source={s}/></td>
+          <td>{[r.T.Id]}</td>
+          <td>{[r.T.Nam]}</td>
+        </tr></xml>);
+        return ((s, r.T.Id) :: ss)
+      )
     );
 
-    query_ (SELECT * FROM t) (fn r =>
-      push (<xml><div>{[r.T.Id]}{[r.T.Nam]}</div><br/></xml>);
-      return {}
-    );
+    push(<xml>
+      <button value="Rename selected" onclick={fn _ =>
+        c <- checked ss;
+        rpc(rename c);
+        redirect(url (viewm {}))
+      }/>
+    </xml>);
 
-    n <- query (SELECT * FROM t) 0 (fn r i =>
-      push (<xml><div>{[r.T.Id]}{[r.T.Nam]}</div></xml>);
-      return (i+1)
-    );
-
-    return n);
+    return 0);
 
   return
     <xml>
