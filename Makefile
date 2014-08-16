@@ -22,7 +22,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 	cat .cake3/tmpXmlGen.in6 > ./test/XmlGen.urp
 .cake3/tmpXmlGen.in6: ./Makefile
 	-rm -rf .cake3/tmpXmlGen.in6
-	echo 'database dbname=XmlGen' >> .cake3/tmpXmlGen.in6
+	echo 'database dbname=XmlGen.db' >> .cake3/tmpXmlGen.in6
 	echo 'sql .././test/XmlGen.sql' >> .cake3/tmpXmlGen.in6
 	echo 'library ../.' >> .cake3/tmpXmlGen.in6
 	echo 'debug' >> .cake3/tmpXmlGen.in6
@@ -35,7 +35,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 	cat .cake3/tmpTestState3.in5 > ./test/TestState3.urp
 .cake3/tmpTestState3.in5: ./Makefile
 	-rm -rf .cake3/tmpTestState3.in5
-	echo 'database dbname=TestState3' >> .cake3/tmpTestState3.in5
+	echo 'database dbname=TestState3.db' >> .cake3/tmpTestState3.in5
 	echo 'sql .././test/TestState3.sql' >> .cake3/tmpTestState3.in5
 	echo 'library ../.' >> .cake3/tmpTestState3.in5
 	echo 'debug' >> .cake3/tmpTestState3.in5
@@ -48,7 +48,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 	cat .cake3/tmpTestState2.in4 > ./test/TestState2.urp
 .cake3/tmpTestState2.in4: ./Makefile
 	-rm -rf .cake3/tmpTestState2.in4
-	echo 'database dbname=TestState2' >> .cake3/tmpTestState2.in4
+	echo 'database dbname=TestState2.db' >> .cake3/tmpTestState2.in4
 	echo 'sql .././test/TestState2.sql' >> .cake3/tmpTestState2.in4
 	echo 'library ../.' >> .cake3/tmpTestState2.in4
 	echo 'debug' >> .cake3/tmpTestState2.in4
@@ -61,7 +61,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 	cat .cake3/tmpTestState1.in3 > ./test/TestState1.urp
 .cake3/tmpTestState1.in3: ./Makefile
 	-rm -rf .cake3/tmpTestState1.in3
-	echo 'database dbname=TestState1' >> .cake3/tmpTestState1.in3
+	echo 'database dbname=TestState1.db' >> .cake3/tmpTestState1.in3
 	echo 'sql .././test/TestState1.sql' >> .cake3/tmpTestState1.in3
 	echo 'library ../.' >> .cake3/tmpTestState1.in3
 	echo 'debug' >> .cake3/tmpTestState1.in3
@@ -74,7 +74,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 	cat .cake3/tmpTestError1.in2 > ./test/TestError1.urp
 .cake3/tmpTestError1.in2: ./Makefile
 	-rm -rf .cake3/tmpTestError1.in2
-	echo 'database dbname=TestError1' >> .cake3/tmpTestError1.in2
+	echo 'database dbname=TestError1.db' >> .cake3/tmpTestError1.in2
 	echo 'sql .././test/TestError1.sql' >> .cake3/tmpTestError1.in2
 	echo 'library ../.' >> .cake3/tmpTestError1.in2
 	echo 'debug' >> .cake3/tmpTestError1.in2
@@ -87,7 +87,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 	cat .cake3/tmpTest4.in1 > ./test/Test4.urp
 .cake3/tmpTest4.in1: ./Makefile
 	-rm -rf .cake3/tmpTest4.in1
-	echo 'database dbname=Test4' >> .cake3/tmpTest4.in1
+	echo 'database dbname=Test4.db' >> .cake3/tmpTest4.in1
 	echo 'sql .././test/Test4.sql' >> .cake3/tmpTest4.in1
 	echo 'library ../.' >> .cake3/tmpTest4.in1
 	echo 'debug' >> .cake3/tmpTest4.in1

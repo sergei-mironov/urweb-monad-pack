@@ -18,7 +18,7 @@ project = do
                 "TestState3.ur", "XmlGen.ur"] $ \f -> do
     let src = (file $ "test"</> f)
     uwapp "-dbms sqlite" (src.="urp") $ do
-      database ("dbname="++(takeBaseName f))
+      database ("dbname="++((takeBaseName f) .= "db"))
       sql (src .= "sql")
       library u
       ur (sys "option")
