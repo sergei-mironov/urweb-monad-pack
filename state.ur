@@ -7,7 +7,7 @@ end) :
 
 sig
 
-  type state st a = st -> S.m (st * a)
+  con state :: Type -> Type -> Type
 
   val unState : st ::: Type -> a ::: Type -> state st a -> (st -> S.m (st*a))
 
@@ -29,7 +29,7 @@ end =
 
 struct
 
-  type state st a = st -> S.m (st * a)
+  con state = fn st a => st -> S.m (st * a)
 
   fun unState [st] [a] (f: state st a) : (st -> S.m (st*a)) = f
 

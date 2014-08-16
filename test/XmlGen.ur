@@ -75,21 +75,12 @@ fun viewm {} : transaction page =
       return {}
     );
 
-    (*
-    urweb -dbms sqlite ./test/TestState3
-    /home/grwlf/proj/urweb-monad-pack/state.ur:45:10: (to 48:39) Anonymous function remains at code generation
-    Function:
-    (fn s : FFI(Basis.string) =>
-      (fn _ : {} => {1 = UNBOUND_3, 2 = UNBOUND_2}))
-    make[1]: *** [.fix-multy5] Error 1
-    *)
-
     n <- query (SELECT * FROM t) 0 (fn r i =>
       push (<xml><div>{[r.T.Id]}{[r.T.Nam]}</div></xml>);
       return (i+1)
     );
 
-    return 0);
+    return n);
 
   return
     <xml>
