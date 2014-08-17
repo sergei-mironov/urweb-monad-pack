@@ -24,7 +24,6 @@ project = do
       ur (sys "option")
       ur (sys "list")
       ur (single src)
-      debug
 
   rule $ do
     phony "run"
@@ -33,6 +32,10 @@ project = do
   rule $ do
     phony "clean"
     unsafeShell [cmd|rm -rf .cake3 $(map tempfiles apps)|]
+
+  rule $ do
+    phony "lib"
+    depend u
 
   rule $ do
     phony "all"

@@ -11,6 +11,8 @@ unexport MAIN
 URVERSION = $(shell urweb -version)
 .PHONY: all
 all: ./Makefile.devel ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGen.exe ./test/XmlGen.sql
+.PHONY: lib
+lib: ./Makefile.devel ./lib.urp
 .PHONY: clean
 clean: ./Makefile.devel
 	rm -rf .cake3 ./test/Test4.sql   ./test/Test4.exe ./test/TestError1.sql   ./test/TestError1.exe ./test/TestState1.sql   ./test/TestState1.exe ./test/TestState2.sql   ./test/TestState2.exe ./test/TestState3.sql   ./test/TestState3.exe ./test/XmlGen.sql   ./test/XmlGen.exe
@@ -25,7 +27,6 @@ run: ./Makefile.devel ./test/XmlGen.exe ./test/XmlGen.sql
 	echo 'database dbname=XmlGen.db' >> .cake3/tmpXmlGen.in6
 	echo 'sql .././test/XmlGen.sql' >> .cake3/tmpXmlGen.in6
 	echo 'library ../.' >> .cake3/tmpXmlGen.in6
-	echo 'debug' >> .cake3/tmpXmlGen.in6
 	echo '' >> .cake3/tmpXmlGen.in6
 	echo '$$/option' >> .cake3/tmpXmlGen.in6
 	echo '$$/list' >> .cake3/tmpXmlGen.in6
@@ -38,7 +39,6 @@ run: ./Makefile.devel ./test/XmlGen.exe ./test/XmlGen.sql
 	echo 'database dbname=TestState3.db' >> .cake3/tmpTestState3.in5
 	echo 'sql .././test/TestState3.sql' >> .cake3/tmpTestState3.in5
 	echo 'library ../.' >> .cake3/tmpTestState3.in5
-	echo 'debug' >> .cake3/tmpTestState3.in5
 	echo '' >> .cake3/tmpTestState3.in5
 	echo '$$/option' >> .cake3/tmpTestState3.in5
 	echo '$$/list' >> .cake3/tmpTestState3.in5
@@ -51,7 +51,6 @@ run: ./Makefile.devel ./test/XmlGen.exe ./test/XmlGen.sql
 	echo 'database dbname=TestState2.db' >> .cake3/tmpTestState2.in4
 	echo 'sql .././test/TestState2.sql' >> .cake3/tmpTestState2.in4
 	echo 'library ../.' >> .cake3/tmpTestState2.in4
-	echo 'debug' >> .cake3/tmpTestState2.in4
 	echo '' >> .cake3/tmpTestState2.in4
 	echo '$$/option' >> .cake3/tmpTestState2.in4
 	echo '$$/list' >> .cake3/tmpTestState2.in4
@@ -64,7 +63,6 @@ run: ./Makefile.devel ./test/XmlGen.exe ./test/XmlGen.sql
 	echo 'database dbname=TestState1.db' >> .cake3/tmpTestState1.in3
 	echo 'sql .././test/TestState1.sql' >> .cake3/tmpTestState1.in3
 	echo 'library ../.' >> .cake3/tmpTestState1.in3
-	echo 'debug' >> .cake3/tmpTestState1.in3
 	echo '' >> .cake3/tmpTestState1.in3
 	echo '$$/option' >> .cake3/tmpTestState1.in3
 	echo '$$/list' >> .cake3/tmpTestState1.in3
@@ -77,7 +75,6 @@ run: ./Makefile.devel ./test/XmlGen.exe ./test/XmlGen.sql
 	echo 'database dbname=TestError1.db' >> .cake3/tmpTestError1.in2
 	echo 'sql .././test/TestError1.sql' >> .cake3/tmpTestError1.in2
 	echo 'library ../.' >> .cake3/tmpTestError1.in2
-	echo 'debug' >> .cake3/tmpTestError1.in2
 	echo '' >> .cake3/tmpTestError1.in2
 	echo '$$/option' >> .cake3/tmpTestError1.in2
 	echo '$$/list' >> .cake3/tmpTestError1.in2
@@ -90,7 +87,6 @@ run: ./Makefile.devel ./test/XmlGen.exe ./test/XmlGen.sql
 	echo 'database dbname=Test4.db' >> .cake3/tmpTest4.in1
 	echo 'sql .././test/Test4.sql' >> .cake3/tmpTest4.in1
 	echo 'library ../.' >> .cake3/tmpTest4.in1
-	echo 'debug' >> .cake3/tmpTest4.in1
 	echo '' >> .cake3/tmpTest4.in1
 	echo '$$/option' >> .cake3/tmpTest4.in1
 	echo '$$/list' >> .cake3/tmpTest4.in1
@@ -142,6 +138,8 @@ else
 
 .PHONY: all
 all: .fix-multy1
+.PHONY: lib
+lib: .fix-multy1
 .PHONY: clean
 clean: .fix-multy1
 .PHONY: run
