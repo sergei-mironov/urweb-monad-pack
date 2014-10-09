@@ -1,8 +1,8 @@
-module Cakefile where
+module Cake_MonadPack where
 
 import Development.Cake3
 import Development.Cake3.Ext.UrWeb
-import Cakefile_P
+import Cake_MonadPack_P
 
 instance IsString File where fromString = file
 
@@ -15,7 +15,7 @@ project = do
     ur (single "pure.ur")
 
   apps <- forM ["Test4.ur", "TestError1.ur", "TestState1.ur", "TestState2.ur",
-                "TestState3.ur", "XmlGen.ur"] $ \f -> do
+                "TestState3.ur", "XmlGenDemo.ur"] $ \f -> do
     let src = (file $ "test"</> f)
     uwapp "-dbms sqlite" (src.="urp") $ do
       database ("dbname="++((takeBaseName f) .= "db"))

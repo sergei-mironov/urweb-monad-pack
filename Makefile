@@ -10,27 +10,27 @@ unexport MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: all
-all: ./Makefile ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGen.exe ./test/XmlGen.sql
+all: ./Makefile ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
 .PHONY: lib
 lib: ./Makefile ./lib.urp
 .PHONY: clean
 clean: ./Makefile
-	rm -rf .cake3 ./test/Test4.sql   ./test/Test4.exe ./test/TestError1.sql   ./test/TestError1.exe ./test/TestState1.sql   ./test/TestState1.exe ./test/TestState2.sql   ./test/TestState2.exe ./test/TestState3.sql   ./test/TestState3.exe ./test/XmlGen.sql   ./test/XmlGen.exe
+	rm -rf .cake3 ./test/Test4.sql   ./test/Test4.exe ./test/TestError1.sql   ./test/TestError1.exe ./test/TestState1.sql   ./test/TestState1.exe ./test/TestState2.sql   ./test/TestState2.exe ./test/TestState3.sql   ./test/TestState3.exe ./test/XmlGenDemo.sql   ./test/XmlGenDemo.exe
 .PHONY: run
-run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
-	./test/XmlGen.exe
-./test/XmlGen.exe: .fix-multy6
-./test/XmlGen.urp: ./Makefile ./lib.urp ./test/XmlGen.ur .cake3/tmpXmlGen.in6
-	cat .cake3/tmpXmlGen.in6 > ./test/XmlGen.urp
-.cake3/tmpXmlGen.in6: ./Makefile
-	-rm -rf .cake3/tmpXmlGen.in6
-	echo 'database dbname=XmlGen.db' >> .cake3/tmpXmlGen.in6
-	echo 'sql .././test/XmlGen.sql' >> .cake3/tmpXmlGen.in6
-	echo 'library ../.' >> .cake3/tmpXmlGen.in6
-	echo '' >> .cake3/tmpXmlGen.in6
-	echo '$$/option' >> .cake3/tmpXmlGen.in6
-	echo '$$/list' >> .cake3/tmpXmlGen.in6
-	echo '.././test/XmlGen' >> .cake3/tmpXmlGen.in6
+run: ./Makefile ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
+	./test/XmlGenDemo.exe
+./test/XmlGenDemo.exe: .fix-multy6
+./test/XmlGenDemo.urp: ./Makefile ./lib.urp ./test/XmlGenDemo.ur .cake3/tmpXmlGenDemo.in6
+	cat .cake3/tmpXmlGenDemo.in6 > ./test/XmlGenDemo.urp
+.cake3/tmpXmlGenDemo.in6: ./Makefile
+	-rm -rf .cake3/tmpXmlGenDemo.in6
+	echo 'database dbname=XmlGenDemo.db' >> .cake3/tmpXmlGenDemo.in6
+	echo 'sql .././test/XmlGenDemo.sql' >> .cake3/tmpXmlGenDemo.in6
+	echo 'library ../.' >> .cake3/tmpXmlGenDemo.in6
+	echo '' >> .cake3/tmpXmlGenDemo.in6
+	echo '$$/option' >> .cake3/tmpXmlGenDemo.in6
+	echo '$$/list' >> .cake3/tmpXmlGenDemo.in6
+	echo '.././test/XmlGenDemo' >> .cake3/tmpXmlGenDemo.in6
 ./test/TestState3.exe: .fix-multy5
 ./test/TestState3.urp: ./Makefile ./lib.urp ./test/TestState3.ur .cake3/tmpTestState3.in5
 	cat .cake3/tmpTestState3.in5 > ./test/TestState3.urp
@@ -105,7 +105,7 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 ./test/TestState1.sql: .fix-multy3
 ./test/TestState2.sql: .fix-multy4
 ./test/TestState3.sql: .fix-multy5
-./test/XmlGen.sql: .fix-multy6
+./test/XmlGenDemo.sql: .fix-multy6
 .INTERMEDIATE: .fix-multy1
 .fix-multy1: ./Makefile ./test/Test4.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/Test4
@@ -122,8 +122,8 @@ run: ./Makefile ./test/XmlGen.exe ./test/XmlGen.sql
 .fix-multy5: ./Makefile ./test/TestState3.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState3
 .INTERMEDIATE: .fix-multy6
-.fix-multy6: ./Makefile ./test/XmlGen.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/XmlGen
+.fix-multy6: ./Makefile ./test/XmlGenDemo.urp $(call GUARD,URVERSION)
+	urweb -dbms sqlite ./test/XmlGenDemo
 $(call GUARD,URVERSION):
 	rm -f .cake3/GUARD_URVERSION_*
 	touch $@
@@ -140,12 +140,12 @@ lib: .fix-multy1
 clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
-.PHONY: ./test/XmlGen.exe
-./test/XmlGen.exe: .fix-multy1
-.PHONY: ./test/XmlGen.urp
-./test/XmlGen.urp: .fix-multy1
-.PHONY: .cake3/tmpXmlGen.in6
-.cake3/tmpXmlGen.in6: .fix-multy1
+.PHONY: ./test/XmlGenDemo.exe
+./test/XmlGenDemo.exe: .fix-multy1
+.PHONY: ./test/XmlGenDemo.urp
+./test/XmlGenDemo.urp: .fix-multy1
+.PHONY: .cake3/tmpXmlGenDemo.in6
+.cake3/tmpXmlGenDemo.in6: .fix-multy1
 .PHONY: ./test/TestState3.exe
 ./test/TestState3.exe: .fix-multy1
 .PHONY: ./test/TestState3.urp
@@ -190,8 +190,8 @@ run: .fix-multy1
 ./test/TestState2.sql: .fix-multy1
 .PHONY: ./test/TestState3.sql
 ./test/TestState3.sql: .fix-multy1
-.PHONY: ./test/XmlGen.sql
-./test/XmlGen.sql: .fix-multy1
+.PHONY: ./test/XmlGenDemo.sql
+./test/XmlGenDemo.sql: .fix-multy1
 .INTERMEDIATE: .fix-multy1
 .fix-multy1: 
 	-mkdir .cake3
