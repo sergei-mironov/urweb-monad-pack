@@ -4,18 +4,21 @@ import Development.Cake3
 import Development.Cake3.Ext.UrWeb
 import Cake_MonadPack_P
 
-instance IsString File where fromString = file
+-- instance IsString File where fromString = file
+
+lib = do
+  uwlib (file "lib.urp") $ do
+    ur (single (file "error.ur"))
+    ur (single (file "state.ur"))
+    ur (single (file "identity.ur"))
+    ur (single (file "pure.ur"))
 
 project = do
 
-  u <- uwlib "lib.urp" $ do
-    ur (single "error.ur")
-    ur (single "state.ur")
-    ur (single "identity.ur")
-    ur (single "pure.ur")
+  u <- lib
 
-  apps <- forM ["Test4.ur", "TestError1.ur", "TestState1.ur", "TestState2.ur",
-                "TestState3.ur", "XmlGenDemo.ur"] $ \f -> do
+  apps <- forM (["Test4.ur", "TestError1.ur", "TestState1.ur", "TestState2.ur",
+                "TestState3.ur", "XmlGenDemo.ur"]) $ \f -> do
     let src = (file $ "test"</> f)
     uwapp "-dbms sqlite" (src.="urp") $ do
       database ("dbname="++((takeBaseName f) .= "db"))

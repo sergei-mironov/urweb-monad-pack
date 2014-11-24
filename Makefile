@@ -20,86 +20,86 @@ clean: ./Makefile
 run: ./Makefile ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
 	./test/XmlGenDemo.exe
 ./test/XmlGenDemo.exe: .fix-multy6
-./test/XmlGenDemo.urp: ./Makefile ./lib.urp ./test/XmlGenDemo.ur .cake3/tmpXmlGenDemo.in6
-	cat .cake3/tmpXmlGenDemo.in6 > ./test/XmlGenDemo.urp
-.cake3/tmpXmlGenDemo.in6: ./Makefile
-	-rm -rf .cake3/tmpXmlGenDemo.in6
-	echo 'database dbname=XmlGenDemo.db' >> .cake3/tmpXmlGenDemo.in6
-	echo 'sql .././test/XmlGenDemo.sql' >> .cake3/tmpXmlGenDemo.in6
-	echo 'library ../.' >> .cake3/tmpXmlGenDemo.in6
-	echo '' >> .cake3/tmpXmlGenDemo.in6
-	echo '$$/option' >> .cake3/tmpXmlGenDemo.in6
-	echo '$$/list' >> .cake3/tmpXmlGenDemo.in6
-	echo '.././test/XmlGenDemo' >> .cake3/tmpXmlGenDemo.in6
+./test/XmlGenDemo.urp: ./Makefile ./lib.urp ./test/XmlGenDemo.ur .cake3/tmp__testXmlGenDemo_in
+	cat .cake3/tmp__testXmlGenDemo_in > ./test/XmlGenDemo.urp
+.cake3/tmp__testXmlGenDemo_in: ./Makefile
+	-rm -rf .cake3/tmp__testXmlGenDemo_in
+	echo 'database dbname=XmlGenDemo.db' >> .cake3/tmp__testXmlGenDemo_in
+	echo 'sql .././test/XmlGenDemo.sql' >> .cake3/tmp__testXmlGenDemo_in
+	echo 'library ../.' >> .cake3/tmp__testXmlGenDemo_in
+	echo '' >> .cake3/tmp__testXmlGenDemo_in
+	echo '$$/option' >> .cake3/tmp__testXmlGenDemo_in
+	echo '$$/list' >> .cake3/tmp__testXmlGenDemo_in
+	echo '.././test/XmlGenDemo' >> .cake3/tmp__testXmlGenDemo_in
 ./test/TestState3.exe: .fix-multy5
-./test/TestState3.urp: ./Makefile ./lib.urp ./test/TestState3.ur .cake3/tmpTestState3.in5
-	cat .cake3/tmpTestState3.in5 > ./test/TestState3.urp
-.cake3/tmpTestState3.in5: ./Makefile
-	-rm -rf .cake3/tmpTestState3.in5
-	echo 'database dbname=TestState3.db' >> .cake3/tmpTestState3.in5
-	echo 'sql .././test/TestState3.sql' >> .cake3/tmpTestState3.in5
-	echo 'library ../.' >> .cake3/tmpTestState3.in5
-	echo '' >> .cake3/tmpTestState3.in5
-	echo '$$/option' >> .cake3/tmpTestState3.in5
-	echo '$$/list' >> .cake3/tmpTestState3.in5
-	echo '.././test/TestState3' >> .cake3/tmpTestState3.in5
+./test/TestState3.urp: ./Makefile ./lib.urp ./test/TestState3.ur .cake3/tmp__testTestState3_in
+	cat .cake3/tmp__testTestState3_in > ./test/TestState3.urp
+.cake3/tmp__testTestState3_in: ./Makefile
+	-rm -rf .cake3/tmp__testTestState3_in
+	echo 'database dbname=TestState3.db' >> .cake3/tmp__testTestState3_in
+	echo 'sql .././test/TestState3.sql' >> .cake3/tmp__testTestState3_in
+	echo 'library ../.' >> .cake3/tmp__testTestState3_in
+	echo '' >> .cake3/tmp__testTestState3_in
+	echo '$$/option' >> .cake3/tmp__testTestState3_in
+	echo '$$/list' >> .cake3/tmp__testTestState3_in
+	echo '.././test/TestState3' >> .cake3/tmp__testTestState3_in
 ./test/TestState2.exe: .fix-multy4
-./test/TestState2.urp: ./Makefile ./lib.urp ./test/TestState2.ur .cake3/tmpTestState2.in4
-	cat .cake3/tmpTestState2.in4 > ./test/TestState2.urp
-.cake3/tmpTestState2.in4: ./Makefile
-	-rm -rf .cake3/tmpTestState2.in4
-	echo 'database dbname=TestState2.db' >> .cake3/tmpTestState2.in4
-	echo 'sql .././test/TestState2.sql' >> .cake3/tmpTestState2.in4
-	echo 'library ../.' >> .cake3/tmpTestState2.in4
-	echo '' >> .cake3/tmpTestState2.in4
-	echo '$$/option' >> .cake3/tmpTestState2.in4
-	echo '$$/list' >> .cake3/tmpTestState2.in4
-	echo '.././test/TestState2' >> .cake3/tmpTestState2.in4
+./test/TestState2.urp: ./Makefile ./lib.urp ./test/TestState2.ur .cake3/tmp__testTestState2_in
+	cat .cake3/tmp__testTestState2_in > ./test/TestState2.urp
+.cake3/tmp__testTestState2_in: ./Makefile
+	-rm -rf .cake3/tmp__testTestState2_in
+	echo 'database dbname=TestState2.db' >> .cake3/tmp__testTestState2_in
+	echo 'sql .././test/TestState2.sql' >> .cake3/tmp__testTestState2_in
+	echo 'library ../.' >> .cake3/tmp__testTestState2_in
+	echo '' >> .cake3/tmp__testTestState2_in
+	echo '$$/option' >> .cake3/tmp__testTestState2_in
+	echo '$$/list' >> .cake3/tmp__testTestState2_in
+	echo '.././test/TestState2' >> .cake3/tmp__testTestState2_in
 ./test/TestState1.exe: .fix-multy3
-./test/TestState1.urp: ./Makefile ./lib.urp ./test/TestState1.ur .cake3/tmpTestState1.in3
-	cat .cake3/tmpTestState1.in3 > ./test/TestState1.urp
-.cake3/tmpTestState1.in3: ./Makefile
-	-rm -rf .cake3/tmpTestState1.in3
-	echo 'database dbname=TestState1.db' >> .cake3/tmpTestState1.in3
-	echo 'sql .././test/TestState1.sql' >> .cake3/tmpTestState1.in3
-	echo 'library ../.' >> .cake3/tmpTestState1.in3
-	echo '' >> .cake3/tmpTestState1.in3
-	echo '$$/option' >> .cake3/tmpTestState1.in3
-	echo '$$/list' >> .cake3/tmpTestState1.in3
-	echo '.././test/TestState1' >> .cake3/tmpTestState1.in3
+./test/TestState1.urp: ./Makefile ./lib.urp ./test/TestState1.ur .cake3/tmp__testTestState1_in
+	cat .cake3/tmp__testTestState1_in > ./test/TestState1.urp
+.cake3/tmp__testTestState1_in: ./Makefile
+	-rm -rf .cake3/tmp__testTestState1_in
+	echo 'database dbname=TestState1.db' >> .cake3/tmp__testTestState1_in
+	echo 'sql .././test/TestState1.sql' >> .cake3/tmp__testTestState1_in
+	echo 'library ../.' >> .cake3/tmp__testTestState1_in
+	echo '' >> .cake3/tmp__testTestState1_in
+	echo '$$/option' >> .cake3/tmp__testTestState1_in
+	echo '$$/list' >> .cake3/tmp__testTestState1_in
+	echo '.././test/TestState1' >> .cake3/tmp__testTestState1_in
 ./test/TestError1.exe: .fix-multy2
-./test/TestError1.urp: ./Makefile ./lib.urp ./test/TestError1.ur .cake3/tmpTestError1.in2
-	cat .cake3/tmpTestError1.in2 > ./test/TestError1.urp
-.cake3/tmpTestError1.in2: ./Makefile
-	-rm -rf .cake3/tmpTestError1.in2
-	echo 'database dbname=TestError1.db' >> .cake3/tmpTestError1.in2
-	echo 'sql .././test/TestError1.sql' >> .cake3/tmpTestError1.in2
-	echo 'library ../.' >> .cake3/tmpTestError1.in2
-	echo '' >> .cake3/tmpTestError1.in2
-	echo '$$/option' >> .cake3/tmpTestError1.in2
-	echo '$$/list' >> .cake3/tmpTestError1.in2
-	echo '.././test/TestError1' >> .cake3/tmpTestError1.in2
+./test/TestError1.urp: ./Makefile ./lib.urp ./test/TestError1.ur .cake3/tmp__testTestError1_in
+	cat .cake3/tmp__testTestError1_in > ./test/TestError1.urp
+.cake3/tmp__testTestError1_in: ./Makefile
+	-rm -rf .cake3/tmp__testTestError1_in
+	echo 'database dbname=TestError1.db' >> .cake3/tmp__testTestError1_in
+	echo 'sql .././test/TestError1.sql' >> .cake3/tmp__testTestError1_in
+	echo 'library ../.' >> .cake3/tmp__testTestError1_in
+	echo '' >> .cake3/tmp__testTestError1_in
+	echo '$$/option' >> .cake3/tmp__testTestError1_in
+	echo '$$/list' >> .cake3/tmp__testTestError1_in
+	echo '.././test/TestError1' >> .cake3/tmp__testTestError1_in
 ./test/Test4.exe: .fix-multy1
-./test/Test4.urp: ./Makefile ./lib.urp ./test/Test4.ur .cake3/tmpTest4.in1
-	cat .cake3/tmpTest4.in1 > ./test/Test4.urp
-.cake3/tmpTest4.in1: ./Makefile
-	-rm -rf .cake3/tmpTest4.in1
-	echo 'database dbname=Test4.db' >> .cake3/tmpTest4.in1
-	echo 'sql .././test/Test4.sql' >> .cake3/tmpTest4.in1
-	echo 'library ../.' >> .cake3/tmpTest4.in1
-	echo '' >> .cake3/tmpTest4.in1
-	echo '$$/option' >> .cake3/tmpTest4.in1
-	echo '$$/list' >> .cake3/tmpTest4.in1
-	echo '.././test/Test4' >> .cake3/tmpTest4.in1
-./lib.urp: ./Makefile ./error.ur ./identity.ur ./pure.ur ./state.ur .cake3/tmplib.in0
-	cat .cake3/tmplib.in0 > ./lib.urp
-.cake3/tmplib.in0: ./Makefile
-	-rm -rf .cake3/tmplib.in0
-	echo '' >> .cake3/tmplib.in0
-	echo './error' >> .cake3/tmplib.in0
-	echo './state' >> .cake3/tmplib.in0
-	echo './identity' >> .cake3/tmplib.in0
-	echo './pure' >> .cake3/tmplib.in0
+./test/Test4.urp: ./Makefile ./lib.urp ./test/Test4.ur .cake3/tmp__testTest4_in
+	cat .cake3/tmp__testTest4_in > ./test/Test4.urp
+.cake3/tmp__testTest4_in: ./Makefile
+	-rm -rf .cake3/tmp__testTest4_in
+	echo 'database dbname=Test4.db' >> .cake3/tmp__testTest4_in
+	echo 'sql .././test/Test4.sql' >> .cake3/tmp__testTest4_in
+	echo 'library ../.' >> .cake3/tmp__testTest4_in
+	echo '' >> .cake3/tmp__testTest4_in
+	echo '$$/option' >> .cake3/tmp__testTest4_in
+	echo '$$/list' >> .cake3/tmp__testTest4_in
+	echo '.././test/Test4' >> .cake3/tmp__testTest4_in
+./lib.urp: ./Makefile ./error.ur ./identity.ur ./pure.ur ./state.ur .cake3/tmp__lib_in
+	cat .cake3/tmp__lib_in > ./lib.urp
+.cake3/tmp__lib_in: ./Makefile
+	-rm -rf .cake3/tmp__lib_in
+	echo '' >> .cake3/tmp__lib_in
+	echo './error' >> .cake3/tmp__lib_in
+	echo './state' >> .cake3/tmp__lib_in
+	echo './identity' >> .cake3/tmp__lib_in
+	echo './pure' >> .cake3/tmp__lib_in
 ./test/Test4.sql: .fix-multy1
 ./test/TestError1.sql: .fix-multy2
 ./test/TestState1.sql: .fix-multy3
@@ -144,42 +144,42 @@ run: .fix-multy1
 ./test/XmlGenDemo.exe: .fix-multy1
 .PHONY: ./test/XmlGenDemo.urp
 ./test/XmlGenDemo.urp: .fix-multy1
-.PHONY: .cake3/tmpXmlGenDemo.in6
-.cake3/tmpXmlGenDemo.in6: .fix-multy1
+.PHONY: .cake3/tmp__testXmlGenDemo_in
+.cake3/tmp__testXmlGenDemo_in: .fix-multy1
 .PHONY: ./test/TestState3.exe
 ./test/TestState3.exe: .fix-multy1
 .PHONY: ./test/TestState3.urp
 ./test/TestState3.urp: .fix-multy1
-.PHONY: .cake3/tmpTestState3.in5
-.cake3/tmpTestState3.in5: .fix-multy1
+.PHONY: .cake3/tmp__testTestState3_in
+.cake3/tmp__testTestState3_in: .fix-multy1
 .PHONY: ./test/TestState2.exe
 ./test/TestState2.exe: .fix-multy1
 .PHONY: ./test/TestState2.urp
 ./test/TestState2.urp: .fix-multy1
-.PHONY: .cake3/tmpTestState2.in4
-.cake3/tmpTestState2.in4: .fix-multy1
+.PHONY: .cake3/tmp__testTestState2_in
+.cake3/tmp__testTestState2_in: .fix-multy1
 .PHONY: ./test/TestState1.exe
 ./test/TestState1.exe: .fix-multy1
 .PHONY: ./test/TestState1.urp
 ./test/TestState1.urp: .fix-multy1
-.PHONY: .cake3/tmpTestState1.in3
-.cake3/tmpTestState1.in3: .fix-multy1
+.PHONY: .cake3/tmp__testTestState1_in
+.cake3/tmp__testTestState1_in: .fix-multy1
 .PHONY: ./test/TestError1.exe
 ./test/TestError1.exe: .fix-multy1
 .PHONY: ./test/TestError1.urp
 ./test/TestError1.urp: .fix-multy1
-.PHONY: .cake3/tmpTestError1.in2
-.cake3/tmpTestError1.in2: .fix-multy1
+.PHONY: .cake3/tmp__testTestError1_in
+.cake3/tmp__testTestError1_in: .fix-multy1
 .PHONY: ./test/Test4.exe
 ./test/Test4.exe: .fix-multy1
 .PHONY: ./test/Test4.urp
 ./test/Test4.urp: .fix-multy1
-.PHONY: .cake3/tmpTest4.in1
-.cake3/tmpTest4.in1: .fix-multy1
+.PHONY: .cake3/tmp__testTest4_in
+.cake3/tmp__testTest4_in: .fix-multy1
 .PHONY: ./lib.urp
 ./lib.urp: .fix-multy1
-.PHONY: .cake3/tmplib.in0
-.cake3/tmplib.in0: .fix-multy1
+.PHONY: .cake3/tmp__lib_in
+.cake3/tmp__lib_in: .fix-multy1
 .PHONY: ./test/Test4.sql
 ./test/Test4.sql: .fix-multy1
 .PHONY: ./test/TestError1.sql
