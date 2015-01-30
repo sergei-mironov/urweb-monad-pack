@@ -11,11 +11,17 @@ unexport MAIN
 URVERSION = $(shell urweb -version)
 .PHONY: all
 all: ./Makefile ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
+./lib.urp: ./Makefile ./error.ur ./identity.ur ./pure.ur ./state.ur .cake3/tmp__lib_in
+	cat .cake3/tmp__lib_in > ./lib.urp
+.cake3/tmp__lib_in: ./Makefile
+	-rm -rf .cake3/tmp__lib_in
+	echo '' >> .cake3/tmp__lib_in
+	echo './error' >> .cake3/tmp__lib_in
+	echo './state' >> .cake3/tmp__lib_in
+	echo './identity' >> .cake3/tmp__lib_in
+	echo './pure' >> .cake3/tmp__lib_in
 .PHONY: lib
 lib: ./Makefile ./lib.urp
-.PHONY: clean
-clean: ./Makefile
-	rm -rf .cake3 ./test/Test4.sql   ./test/Test4.exe ./test/TestError1.sql   ./test/TestError1.exe ./test/TestState1.sql   ./test/TestState1.exe ./test/TestState2.sql   ./test/TestState2.exe ./test/TestState3.sql   ./test/TestState3.exe ./test/XmlGenDemo.sql   ./test/XmlGenDemo.exe
 .PHONY: run
 run: ./Makefile ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
 	./test/XmlGenDemo.exe
@@ -91,15 +97,6 @@ run: ./Makefile ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
 	echo '$$/option' >> .cake3/tmp__testTest4_in
 	echo '$$/list' >> .cake3/tmp__testTest4_in
 	echo '.././test/Test4' >> .cake3/tmp__testTest4_in
-./lib.urp: ./Makefile ./error.ur ./identity.ur ./pure.ur ./state.ur .cake3/tmp__lib_in
-	cat .cake3/tmp__lib_in > ./lib.urp
-.cake3/tmp__lib_in: ./Makefile
-	-rm -rf .cake3/tmp__lib_in
-	echo '' >> .cake3/tmp__lib_in
-	echo './error' >> .cake3/tmp__lib_in
-	echo './state' >> .cake3/tmp__lib_in
-	echo './identity' >> .cake3/tmp__lib_in
-	echo './pure' >> .cake3/tmp__lib_in
 ./test/Test4.sql: .fix-multy1
 ./test/TestError1.sql: .fix-multy2
 ./test/TestState1.sql: .fix-multy3
@@ -132,12 +129,16 @@ else
 
 # Prebuild/postbuild section
 
+ifneq ($(MAKECMDGOALS),clean)
+
 .PHONY: all
 all: .fix-multy1
+.PHONY: ./lib.urp
+./lib.urp: .fix-multy1
+.PHONY: .cake3/tmp__lib_in
+.cake3/tmp__lib_in: .fix-multy1
 .PHONY: lib
 lib: .fix-multy1
-.PHONY: clean
-clean: .fix-multy1
 .PHONY: run
 run: .fix-multy1
 .PHONY: ./test/XmlGenDemo.exe
@@ -176,10 +177,6 @@ run: .fix-multy1
 ./test/Test4.urp: .fix-multy1
 .PHONY: .cake3/tmp__testTest4_in
 .cake3/tmp__testTest4_in: .fix-multy1
-.PHONY: ./lib.urp
-./lib.urp: .fix-multy1
-.PHONY: .cake3/tmp__lib_in
-.cake3/tmp__lib_in: .fix-multy1
 .PHONY: ./test/Test4.sql
 ./test/Test4.sql: .fix-multy1
 .PHONY: ./test/TestError1.sql
@@ -196,5 +193,11 @@ run: .fix-multy1
 .fix-multy1: 
 	-mkdir .cake3
 	MAIN=1 $(MAKE) -f ./Makefile $(MAKECMDGOALS)
+
+endif
+.PHONY: clean
+clean: 
+	-rm ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/Test4.urp ./test/TestError1.exe ./test/TestError1.sql ./test/TestError1.urp ./test/TestState1.exe ./test/TestState1.sql ./test/TestState1.urp ./test/TestState2.exe ./test/TestState2.sql ./test/TestState2.urp ./test/TestState3.exe ./test/TestState3.sql ./test/TestState3.urp ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql ./test/XmlGenDemo.urp .cake3/tmp__lib_in .cake3/tmp__testTest4_in .cake3/tmp__testTestError1_in .cake3/tmp__testTestState1_in .cake3/tmp__testTestState2_in .cake3/tmp__testTestState3_in .cake3/tmp__testXmlGenDemo_in
+	-rm -rf .cake3
 
 endif

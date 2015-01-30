@@ -4,8 +4,6 @@ import Development.Cake3
 import Development.Cake3.Ext.UrWeb
 import Cake_MonadPack_P
 
--- instance IsString File where fromString = file
-
 lib = do
   uwlib (file "lib.urp") $ do
     ur (single (file "error.ur"))
@@ -13,9 +11,7 @@ lib = do
     ur (single (file "identity.ur"))
     ur (single (file "pure.ur"))
 
-project = do
-
-  u <- lib
+main = writeMake (file "Makefile") $ do
 
   apps <- forM (["Test4.ur", "TestError1.ur", "TestState1.ur", "TestState2.ur",
                 "TestState3.ur", "XmlGenDemo.ur"]) $ \f -> do
@@ -23,7 +19,7 @@ project = do
     uwapp "-dbms sqlite" (src.="urp") $ do
       database ("dbname="++((takeBaseName f) .= "db"))
       sql (src .= "sql")
-      library u
+      library lib
       ur (sys "option")
       ur (sys "list")
       ur (single src)
@@ -33,19 +29,10 @@ project = do
     shell [cmd|$(last apps)|]
 
   rule $ do
-    phony "clean"
-    unsafeShell [cmd|rm -rf .cake3 $(map tempfiles apps)|]
-
-  rule $ do
     phony "lib"
-    depend u
+    depend lib
 
   rule $ do
     phony "all"
-    depend u
+    depend lib
     depend apps
-
-main = do
-  writeMake (file "Makefile") (project)
-  writeMake (file "Makefile.devel") (selfUpdate >> project)
-
