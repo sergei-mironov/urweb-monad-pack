@@ -4,12 +4,11 @@ import Development.Cake3
 import Development.Cake3.Ext.UrWeb
 import Cake_MonadPack_P
 
-lib = do
-  uwlib (file "lib.urp") $ do
-    ur (single (file "error.ur"))
-    ur (single (file "state.ur"))
-    ur (single (file "identity.ur"))
-    ur (single (file "pure.ur"))
+lib = uwlib (file "lib.urp") $ do
+  ur (file "error.ur")
+  ur (file "state.ur")
+  ur (file "identity.ur")
+  ur (file "pure.ur")
 
 main = writeMake (file "Makefile") $ do
 
@@ -22,7 +21,7 @@ main = writeMake (file "Makefile") $ do
       library lib
       ur (sys "option")
       ur (sys "list")
-      ur (single src)
+      ur src
 
   rule $ do
     phony "run"
