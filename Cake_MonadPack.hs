@@ -10,7 +10,7 @@ lib = uwlib (file "lib.urp") $ do
   ur (file "identity.ur")
   ur (file "pure.ur")
 
-main = writeMake (file "Makefile") $ do
+main = writeDefaultMakefiles $ do
 
   apps <- forM (["Test4.ur", "TestError1.ur", "TestState1.ur", "TestState2.ur",
                 "TestState3.ur", "XmlGenDemo.ur"]) $ \f -> do

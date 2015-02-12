@@ -10,8 +10,8 @@ unexport MAIN
 
 URVERSION = $(shell urweb -version)
 .PHONY: ./all
-./all: ./Makefile ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
-./.cake3/tmp___lib_in_2: ./Makefile ./error.ur ./identity.ur ./pure.ur ./state.ur
+./all: ./Makefile.dev ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
+./.cake3/tmp___lib_in_2: ./Makefile.dev ./error.ur ./identity.ur ./pure.ur ./state.ur
 	( \
 	echo   ;\
 	echo \.\/error  ;\
@@ -19,140 +19,144 @@ URVERSION = $(shell urweb -version)
 	echo \.\/identity  ;\
 	echo \.\/pure  ;\
 	) > ./.cake3/tmp___lib_in_2
-./.cake3/tmp___lib_in_1: ./Makefile ./error.ur ./identity.ur ./pure.ur ./state.ur
+./.cake3/tmp___lib_in_1: ./Makefile.dev ./error.ur ./identity.ur ./pure.ur ./state.ur
 	echo -n > ./.cake3/tmp___lib_in_1
 .PHONY: ./lib
-./lib: ./Makefile ./lib.urp
+./lib: ./Makefile.dev ./lib.urp
 .PHONY: ./run
-./run: ./Makefile ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
+./run: ./Makefile.dev ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
 	./test/XmlGenDemo.exe
-./.cake3/tmp___test_XmlGenDemo_in_2: ./Makefile ./lib.urp ./test/XmlGenDemo.ur
+./.cake3/tmp___test_XmlGenDemo_in_2: ./Makefile.dev ./lib.urp ./test/XmlGenDemo.ur
 	( \
 	echo   ;\
 	echo $$\/option  ;\
 	echo $$\/list  ;\
 	echo \.\.\/test\/XmlGenDemo  ;\
 	) > ./.cake3/tmp___test_XmlGenDemo_in_2
-./.cake3/tmp___test_XmlGenDemo_in_1: ./Makefile ./lib.urp ./test/XmlGenDemo.ur
+./.cake3/tmp___test_XmlGenDemo_in_1: ./Makefile.dev ./lib.urp ./test/XmlGenDemo.ur
 	( \
 	echo database\ dbname\=XmlGenDemo\.db  ;\
 	echo sql\ \.\.\/test\/XmlGenDemo\.sql  ;\
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_XmlGenDemo_in_1
-./.cake3/tmp___test_TestState3_in_2: ./Makefile ./lib.urp ./test/TestState3.ur
+./.cake3/tmp___test_TestState3_in_2: ./Makefile.dev ./lib.urp ./test/TestState3.ur
 	( \
 	echo   ;\
 	echo $$\/option  ;\
 	echo $$\/list  ;\
 	echo \.\.\/test\/TestState3  ;\
 	) > ./.cake3/tmp___test_TestState3_in_2
-./.cake3/tmp___test_TestState3_in_1: ./Makefile ./lib.urp ./test/TestState3.ur
+./.cake3/tmp___test_TestState3_in_1: ./Makefile.dev ./lib.urp ./test/TestState3.ur
 	( \
 	echo database\ dbname\=TestState3\.db  ;\
 	echo sql\ \.\.\/test\/TestState3\.sql  ;\
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_TestState3_in_1
-./.cake3/tmp___test_TestState2_in_2: ./Makefile ./lib.urp ./test/TestState2.ur
+./.cake3/tmp___test_TestState2_in_2: ./Makefile.dev ./lib.urp ./test/TestState2.ur
 	( \
 	echo   ;\
 	echo $$\/option  ;\
 	echo $$\/list  ;\
 	echo \.\.\/test\/TestState2  ;\
 	) > ./.cake3/tmp___test_TestState2_in_2
-./.cake3/tmp___test_TestState2_in_1: ./Makefile ./lib.urp ./test/TestState2.ur
+./.cake3/tmp___test_TestState2_in_1: ./Makefile.dev ./lib.urp ./test/TestState2.ur
 	( \
 	echo database\ dbname\=TestState2\.db  ;\
 	echo sql\ \.\.\/test\/TestState2\.sql  ;\
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_TestState2_in_1
-./.cake3/tmp___test_TestState1_in_2: ./Makefile ./lib.urp ./test/TestState1.ur
+./.cake3/tmp___test_TestState1_in_2: ./Makefile.dev ./lib.urp ./test/TestState1.ur
 	( \
 	echo   ;\
 	echo $$\/option  ;\
 	echo $$\/list  ;\
 	echo \.\.\/test\/TestState1  ;\
 	) > ./.cake3/tmp___test_TestState1_in_2
-./.cake3/tmp___test_TestState1_in_1: ./Makefile ./lib.urp ./test/TestState1.ur
+./.cake3/tmp___test_TestState1_in_1: ./Makefile.dev ./lib.urp ./test/TestState1.ur
 	( \
 	echo database\ dbname\=TestState1\.db  ;\
 	echo sql\ \.\.\/test\/TestState1\.sql  ;\
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_TestState1_in_1
-./.cake3/tmp___test_TestError1_in_2: ./Makefile ./lib.urp ./test/TestError1.ur
+./.cake3/tmp___test_TestError1_in_2: ./Makefile.dev ./lib.urp ./test/TestError1.ur
 	( \
 	echo   ;\
 	echo $$\/option  ;\
 	echo $$\/list  ;\
 	echo \.\.\/test\/TestError1  ;\
 	) > ./.cake3/tmp___test_TestError1_in_2
-./.cake3/tmp___test_TestError1_in_1: ./Makefile ./lib.urp ./test/TestError1.ur
+./.cake3/tmp___test_TestError1_in_1: ./Makefile.dev ./lib.urp ./test/TestError1.ur
 	( \
 	echo database\ dbname\=TestError1\.db  ;\
 	echo sql\ \.\.\/test\/TestError1\.sql  ;\
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_TestError1_in_1
-./.cake3/tmp___test_Test4_in_2: ./Makefile ./lib.urp ./test/Test4.ur
+./.cake3/tmp___test_Test4_in_2: ./Makefile.dev ./lib.urp ./test/Test4.ur
 	( \
 	echo   ;\
 	echo $$\/option  ;\
 	echo $$\/list  ;\
 	echo \.\.\/test\/Test4  ;\
 	) > ./.cake3/tmp___test_Test4_in_2
-./.cake3/tmp___test_Test4_in_1: ./Makefile ./lib.urp ./test/Test4.ur
+./.cake3/tmp___test_Test4_in_1: ./Makefile.dev ./lib.urp ./test/Test4.ur
 	( \
 	echo database\ dbname\=Test4\.db  ;\
 	echo sql\ \.\.\/test\/Test4\.sql  ;\
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_Test4_in_1
 .INTERMEDIATE: ./.fix-multy1
-./.fix-multy1: ./Makefile ./test/Test4.urp $(call GUARD,URVERSION)
+./.fix-multy1: ./Makefile.dev ./test/Test4.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/Test4
 .INTERMEDIATE: ./.fix-multy2
-./.fix-multy2: ./Makefile ./test/TestError1.urp $(call GUARD,URVERSION)
+./.fix-multy2: ./Makefile.dev ./test/TestError1.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestError1
 .INTERMEDIATE: ./.fix-multy3
-./.fix-multy3: ./Makefile ./test/TestState1.urp $(call GUARD,URVERSION)
+./.fix-multy3: ./Makefile.dev ./test/TestState1.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState1
 .INTERMEDIATE: ./.fix-multy4
-./.fix-multy4: ./Makefile ./test/TestState2.urp $(call GUARD,URVERSION)
+./.fix-multy4: ./Makefile.dev ./test/TestState2.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState2
 .INTERMEDIATE: ./.fix-multy5
-./.fix-multy5: ./Makefile ./test/TestState3.urp $(call GUARD,URVERSION)
+./.fix-multy5: ./Makefile.dev ./test/TestState3.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/TestState3
 .INTERMEDIATE: ./.fix-multy6
-./.fix-multy6: ./Makefile ./test/XmlGenDemo.urp $(call GUARD,URVERSION)
+./.fix-multy6: ./Makefile.dev ./test/XmlGenDemo.urp $(call GUARD,URVERSION)
 	urweb -dbms sqlite ./test/XmlGenDemo
-./lib.urp: ./.cake3/tmp___lib_in_1 ./.cake3/tmp___lib_in_2 ./Makefile
+./Cakegen: ./Cake_MonadPack.hs
+	cake3
+./Makefile.dev: ./Cakegen
+	./Cakegen
+./lib.urp: ./.cake3/tmp___lib_in_1 ./.cake3/tmp___lib_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___lib_in_1 > ./lib.urp
 	cat ./.cake3/tmp___lib_in_2 >> ./lib.urp
 ./test/Test4.exe: ./.fix-multy1
 ./test/Test4.sql: ./.fix-multy1
-./test/Test4.urp: ./.cake3/tmp___test_Test4_in_1 ./.cake3/tmp___test_Test4_in_2 ./Makefile
+./test/Test4.urp: ./.cake3/tmp___test_Test4_in_1 ./.cake3/tmp___test_Test4_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_Test4_in_1 > ./test/Test4.urp
 	cat ./.cake3/tmp___test_Test4_in_2 >> ./test/Test4.urp
 ./test/TestError1.exe: ./.fix-multy2
 ./test/TestError1.sql: ./.fix-multy2
-./test/TestError1.urp: ./.cake3/tmp___test_TestError1_in_1 ./.cake3/tmp___test_TestError1_in_2 ./Makefile
+./test/TestError1.urp: ./.cake3/tmp___test_TestError1_in_1 ./.cake3/tmp___test_TestError1_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_TestError1_in_1 > ./test/TestError1.urp
 	cat ./.cake3/tmp___test_TestError1_in_2 >> ./test/TestError1.urp
 ./test/TestState1.exe: ./.fix-multy3
 ./test/TestState1.sql: ./.fix-multy3
-./test/TestState1.urp: ./.cake3/tmp___test_TestState1_in_1 ./.cake3/tmp___test_TestState1_in_2 ./Makefile
+./test/TestState1.urp: ./.cake3/tmp___test_TestState1_in_1 ./.cake3/tmp___test_TestState1_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_TestState1_in_1 > ./test/TestState1.urp
 	cat ./.cake3/tmp___test_TestState1_in_2 >> ./test/TestState1.urp
 ./test/TestState2.exe: ./.fix-multy4
 ./test/TestState2.sql: ./.fix-multy4
-./test/TestState2.urp: ./.cake3/tmp___test_TestState2_in_1 ./.cake3/tmp___test_TestState2_in_2 ./Makefile
+./test/TestState2.urp: ./.cake3/tmp___test_TestState2_in_1 ./.cake3/tmp___test_TestState2_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_TestState2_in_1 > ./test/TestState2.urp
 	cat ./.cake3/tmp___test_TestState2_in_2 >> ./test/TestState2.urp
 ./test/TestState3.exe: ./.fix-multy5
 ./test/TestState3.sql: ./.fix-multy5
-./test/TestState3.urp: ./.cake3/tmp___test_TestState3_in_1 ./.cake3/tmp___test_TestState3_in_2 ./Makefile
+./test/TestState3.urp: ./.cake3/tmp___test_TestState3_in_1 ./.cake3/tmp___test_TestState3_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_TestState3_in_1 > ./test/TestState3.urp
 	cat ./.cake3/tmp___test_TestState3_in_2 >> ./test/TestState3.urp
 ./test/XmlGenDemo.exe: ./.fix-multy6
 ./test/XmlGenDemo.sql: ./.fix-multy6
-./test/XmlGenDemo.urp: ./.cake3/tmp___test_XmlGenDemo_in_1 ./.cake3/tmp___test_XmlGenDemo_in_2 ./Makefile
+./test/XmlGenDemo.urp: ./.cake3/tmp___test_XmlGenDemo_in_1 ./.cake3/tmp___test_XmlGenDemo_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_XmlGenDemo_in_1 > ./test/XmlGenDemo.urp
 	cat ./.cake3/tmp___test_XmlGenDemo_in_2 >> ./test/XmlGenDemo.urp
 $(call GUARD,URVERSION):
@@ -202,7 +206,11 @@ ifneq ($(MAKECMDGOALS),clean)
 .INTERMEDIATE: ./.fix-multy1
 ./.fix-multy1:
 	-mkdir .cake3
-	MAIN=1 $(MAKE) -f ./Makefile $(MAKECMDGOALS)
+	MAIN=1 $(MAKE) -f ./Makefile.dev $(MAKECMDGOALS)
+.PHONY: ./Cakegen
+./Cakegen: ./.fix-multy1
+.PHONY: ./Makefile.dev
+./Makefile.dev: ./.fix-multy1
 .PHONY: ./lib.urp
 ./lib.urp: ./.fix-multy1
 .PHONY: ./test/Test4.exe
@@ -245,7 +253,7 @@ ifneq ($(MAKECMDGOALS),clean)
 endif
 .PHONY: ./clean
 ./clean:
-	-rm ./.cake3/tmp___lib_in_1 ./.cake3/tmp___lib_in_2 ./.cake3/tmp___test_Test4_in_1 ./.cake3/tmp___test_Test4_in_2 ./.cake3/tmp___test_TestError1_in_1 ./.cake3/tmp___test_TestError1_in_2 ./.cake3/tmp___test_TestState1_in_1 ./.cake3/tmp___test_TestState1_in_2 ./.cake3/tmp___test_TestState2_in_1 ./.cake3/tmp___test_TestState2_in_2 ./.cake3/tmp___test_TestState3_in_1 ./.cake3/tmp___test_TestState3_in_2 ./.cake3/tmp___test_XmlGenDemo_in_1 ./.cake3/tmp___test_XmlGenDemo_in_2 ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/Test4.urp ./test/TestError1.exe ./test/TestError1.sql ./test/TestError1.urp ./test/TestState1.exe ./test/TestState1.sql ./test/TestState1.urp ./test/TestState2.exe ./test/TestState2.sql ./test/TestState2.urp ./test/TestState3.exe ./test/TestState3.sql ./test/TestState3.urp ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql ./test/XmlGenDemo.urp
+	-rm ./.cake3/tmp___lib_in_1 ./.cake3/tmp___lib_in_2 ./.cake3/tmp___test_Test4_in_1 ./.cake3/tmp___test_Test4_in_2 ./.cake3/tmp___test_TestError1_in_1 ./.cake3/tmp___test_TestError1_in_2 ./.cake3/tmp___test_TestState1_in_1 ./.cake3/tmp___test_TestState1_in_2 ./.cake3/tmp___test_TestState2_in_1 ./.cake3/tmp___test_TestState2_in_2 ./.cake3/tmp___test_TestState3_in_1 ./.cake3/tmp___test_TestState3_in_2 ./.cake3/tmp___test_XmlGenDemo_in_1 ./.cake3/tmp___test_XmlGenDemo_in_2 ./Cakegen ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/Test4.urp ./test/TestError1.exe ./test/TestError1.sql ./test/TestError1.urp ./test/TestState1.exe ./test/TestState1.sql ./test/TestState1.urp ./test/TestState2.exe ./test/TestState2.sql ./test/TestState2.urp ./test/TestState3.exe ./test/TestState3.sql ./test/TestState3.urp ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql ./test/XmlGenDemo.urp
 	-rm -rf .cake3
 
 endif
