@@ -17,6 +17,8 @@ sig
 
   val fail : e ::: Type -> a ::: Type -> e -> error e a
 
+  val lift : e ::: Type -> a ::: Type -> S.m a -> error e a
+
   val monad_error : e ::: Type -> monad (error e)
 
 end =
@@ -41,5 +43,9 @@ struct
 
   val monad_error = fn [e ::: Type] => (@@mkMonad [error e] { Return = @@mreturn [e], Bind = @@mbind [e] })
 
+  fun lift [e] [a] (ma:S.m a) : error e a =
+    ( a <- ma;
+      return (ERight a)
+    )
 end
 

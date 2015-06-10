@@ -25,6 +25,7 @@ fun tes2 i : transaction xbody =
         @@E.fail [string] [int] "oooops"
       else
         return {};
+      E.lift (debug "lift test");
       s2 <- return (s1 + 1);
       return (s2+2)
       );
