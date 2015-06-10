@@ -16,12 +16,15 @@ fun tes1 {} : transaction xbody =
       )
   end
 
-fun tes2 {} : transaction xbody =
+fun tes2 i : transaction xbody =
   let
   in
     o <- E.run (
-      s1 <- return 1;
-      E.fail "oooops";
+      s1 <- return i;
+      if ((mod i 2) = 0) then
+        @@E.fail [string] [int] "oooops"
+      else
+        return {};
       s2 <- return (s1 + 1);
       return (s2+2)
       );
@@ -34,8 +37,9 @@ fun tes2 {} : transaction xbody =
   end
 
 fun main {} : transaction page = 
+    i <- rand;
     o1 <- tes1 {};
-    o2 <- tes2 {};
+    o2 <- tes2 i;
     return
       <xml>
         <head>

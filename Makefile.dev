@@ -8,7 +8,10 @@ unexport MAIN
 
 # Main section
 
-URVERSION = $(shell urweb -version)
+URWEB = urweb
+UWFLAGS = 
+UWINCLUDEDIR = $(shell $(URWEB) -print-cinclude)/..
+UWVER = $(shell $(URWEB) -version)
 .PHONY: ./all
 ./all: ./Makefile.dev ./lib.urp ./test/Test4.exe ./test/Test4.sql ./test/TestError1.exe ./test/TestError1.sql ./test/TestState1.exe ./test/TestState1.sql ./test/TestState2.exe ./test/TestState2.sql ./test/TestState3.exe ./test/TestState3.sql ./test/XmlGenDemo.exe ./test/XmlGenDemo.sql
 ./.cake3/tmp___lib_in_2: ./Makefile.dev ./error.ur ./identity.ur ./pure.ur ./state.ur
@@ -105,23 +108,23 @@ URVERSION = $(shell urweb -version)
 	echo library\ \.\.\/  ;\
 	) > ./.cake3/tmp___test_Test4_in_1
 .INTERMEDIATE: ./.fix-multy1
-./.fix-multy1: ./Makefile.dev ./test/Test4.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/Test4
+./.fix-multy1: ./Makefile.dev ./test/Test4.urp $(call GUARD,URWEB) $(call GUARD,UWFLAGS) $(call GUARD,UWINCLUDEDIR) $(call GUARD,UWVER)
+	C_INCLUDE_PATH=$(UWINCLUDEDIR) $(URWEB) -dbms sqlite $(UWFLAGS) ./test/Test4
 .INTERMEDIATE: ./.fix-multy2
-./.fix-multy2: ./Makefile.dev ./test/TestError1.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/TestError1
+./.fix-multy2: ./Makefile.dev ./test/TestError1.urp $(call GUARD,URWEB) $(call GUARD,UWFLAGS) $(call GUARD,UWINCLUDEDIR) $(call GUARD,UWVER)
+	C_INCLUDE_PATH=$(UWINCLUDEDIR) $(URWEB) -dbms sqlite $(UWFLAGS) ./test/TestError1
 .INTERMEDIATE: ./.fix-multy3
-./.fix-multy3: ./Makefile.dev ./test/TestState1.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/TestState1
+./.fix-multy3: ./Makefile.dev ./test/TestState1.urp $(call GUARD,URWEB) $(call GUARD,UWFLAGS) $(call GUARD,UWINCLUDEDIR) $(call GUARD,UWVER)
+	C_INCLUDE_PATH=$(UWINCLUDEDIR) $(URWEB) -dbms sqlite $(UWFLAGS) ./test/TestState1
 .INTERMEDIATE: ./.fix-multy4
-./.fix-multy4: ./Makefile.dev ./test/TestState2.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/TestState2
+./.fix-multy4: ./Makefile.dev ./test/TestState2.urp $(call GUARD,URWEB) $(call GUARD,UWFLAGS) $(call GUARD,UWINCLUDEDIR) $(call GUARD,UWVER)
+	C_INCLUDE_PATH=$(UWINCLUDEDIR) $(URWEB) -dbms sqlite $(UWFLAGS) ./test/TestState2
 .INTERMEDIATE: ./.fix-multy5
-./.fix-multy5: ./Makefile.dev ./test/TestState3.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/TestState3
+./.fix-multy5: ./Makefile.dev ./test/TestState3.urp $(call GUARD,URWEB) $(call GUARD,UWFLAGS) $(call GUARD,UWINCLUDEDIR) $(call GUARD,UWVER)
+	C_INCLUDE_PATH=$(UWINCLUDEDIR) $(URWEB) -dbms sqlite $(UWFLAGS) ./test/TestState3
 .INTERMEDIATE: ./.fix-multy6
-./.fix-multy6: ./Makefile.dev ./test/XmlGenDemo.urp $(call GUARD,URVERSION)
-	urweb -dbms sqlite ./test/XmlGenDemo
+./.fix-multy6: ./Makefile.dev ./test/XmlGenDemo.urp $(call GUARD,URWEB) $(call GUARD,UWFLAGS) $(call GUARD,UWINCLUDEDIR) $(call GUARD,UWVER)
+	C_INCLUDE_PATH=$(UWINCLUDEDIR) $(URWEB) -dbms sqlite $(UWFLAGS) ./test/XmlGenDemo
 ./Cakegen: ./Cake_MonadPack.hs
 	cake3
 ./Makefile.dev: ./Cakegen
@@ -159,8 +162,17 @@ URVERSION = $(shell urweb -version)
 ./test/XmlGenDemo.urp: ./.cake3/tmp___test_XmlGenDemo_in_1 ./.cake3/tmp___test_XmlGenDemo_in_2 ./Makefile.dev
 	cat ./.cake3/tmp___test_XmlGenDemo_in_1 > ./test/XmlGenDemo.urp
 	cat ./.cake3/tmp___test_XmlGenDemo_in_2 >> ./test/XmlGenDemo.urp
-$(call GUARD,URVERSION):
-	rm -f .cake3/GUARD_URVERSION_*
+$(call GUARD,URWEB):
+	rm -f .cake3/GUARD_URWEB_*
+	touch $@
+$(call GUARD,UWFLAGS):
+	rm -f .cake3/GUARD_UWFLAGS_*
+	touch $@
+$(call GUARD,UWINCLUDEDIR):
+	rm -f .cake3/GUARD_UWINCLUDEDIR_*
+	touch $@
+$(call GUARD,UWVER):
+	rm -f .cake3/GUARD_UWVER_*
 	touch $@
 
 else

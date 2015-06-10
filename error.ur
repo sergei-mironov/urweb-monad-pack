@@ -9,7 +9,9 @@ end) :
 
 sig
 
-  datatype error e a = Error of S.m (either e a)
+  con error :: Type -> Type -> Type
+
+  val unError : e ::: Type -> a ::: Type -> error e a -> S.m (either e a)
 
   val run : e ::: Type -> a ::: Type -> error e a -> S.m (either e a)
 
@@ -21,24 +23,23 @@ end =
 
 struct
 
-  datatype error e a = Error of S.m (either e a)
+  con error = fn e => fn a => S.m (either e a)
 
-  fun unError [e] [a] ((Error m):error e a) : S.m (either e a) = m
+  fun unError [e] [a] (m:error e a) : S.m (either e a) = m
 
   val run [e] [a] (m:error e a) = unError m
 
-  val fail [e] [a] err = Error (return (ELeft err))
+  val fail [e] [a] (err:e) = (return (ELeft err))
 
-  fun mreturn [e] [a] (r:a) : error e a = Error (return (ERight r))
+  fun mreturn [e] [a] (r:a) : error e a = (return (ERight r))
 
   fun mbind [e] [a] [b] (m1 : error e a) (m2 : a -> error e b) : error e b =
-    Error (
-      r <- unError m1;
+    ( r <- unError m1;
       case r of
         | ELeft e => return (ELeft e)
         | ERight a => unError (m2 a))
 
-  val monad_error = fn [e ::: Type] => mkMonad { Return = @@mreturn [e], Bind = @@mbind [e] }
+  val monad_error = fn [e ::: Type] => (@@mkMonad [error e] { Return = @@mreturn [e], Bind = @@mbind [e] })
 
 end
 
