@@ -17,7 +17,7 @@ fun testopt (b:bool) : transaction xbody =
       return (s2+2)
       )
   in
-    return 
+    return
       (case o of
           Some (s,v) => <xml>State {[s.Val]} Val {[v]}</xml>
         | None => <xml>Nope!</xml>
@@ -40,7 +40,7 @@ fun testtrans {} : transaction xbody =
     return <xml>State {[s.Val]} Val {[v]}</xml>
   end
 
-fun main {} : transaction page = 
+fun main {} : transaction page =
     o1 <- testopt True;
     o2 <- testopt False;
     t <- testtrans {};
