@@ -1,12 +1,14 @@
+libraries :
+
 let
 
-uwb = import <urweb-build>;
+  uwb = import <urweb-build> libraries;
 
 in with uwb;
 
 rec {
 
-  lib = mkLib {
+  monad-pack = mkLib {
     name = "MonadPack";
 
     statements = [
@@ -17,13 +19,16 @@ rec {
     ];
   };
 
-
   tests = let
     mkTest = src : mkExe {
       name = "Test";
       dbms = "sqlite";
+
+      libraries = {
+        inherit monad-pack;
+      };
+
       statements = [
-        (lib-local lib)
         (sys "option")
         (sys "list")
         (src1 src)
