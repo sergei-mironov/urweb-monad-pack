@@ -1,4 +1,4 @@
-libraries :
+{ libraries ? {} } :
 
 let
 
